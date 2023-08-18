@@ -13,7 +13,7 @@ export default function Category ({title} : {title: string}) {
             setProducts(data.products)
         })()
             
-    }, [])
+    }, [title])
 
     
     return (
