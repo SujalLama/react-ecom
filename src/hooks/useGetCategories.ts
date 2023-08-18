@@ -3,7 +3,7 @@ import { getProductsCategories } from "../api/products";
 
 
 export default function useGetCategories () {
-    const [categories, setCategories] = useState<string[] | undefined>([]);
+    const [categories, setCategories] = useState<string[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | undefined>('');
     

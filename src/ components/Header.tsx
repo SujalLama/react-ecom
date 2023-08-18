@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Cart from "./Cart";
 
 interface INav {
     name: string;
@@ -21,7 +22,7 @@ const navList : INav[] = [
     {
         name: 'Contact',
         link: 'contact'
-    }
+    },
 ]
 
 export default function Header () {
@@ -47,6 +48,7 @@ export default function Header () {
                                         return <Link className="block lg:inline-block text-md font-bold  text-orange-500  sm:hover:border-indigo-400  hover:text-orange-500 mx-2 focus:text-blue-500  p-1 hover:bg-gray-300 sm:hover:bg-transparent rounded-lg" key={nav.link} to={nav.link}>{nav.name}</Link>
                                     })
                                 }
+                                <Cart />
                             </div>
                         </div>
                     </nav>

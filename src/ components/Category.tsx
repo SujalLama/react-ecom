@@ -10,7 +10,7 @@ export default function Category ({title} : {title: string}) {
     
         (async function () {
             const data = await getProductsOfCategory(title);
-            setProducts(data)
+            setProducts(data.products)
         })()
             
     }, [])

@@ -10,7 +10,7 @@ export default function Home () {
     
     return <div>
         {
-            error ? <div>{error}</div> : categories.map(item => <Category key={item} title={item} />)
+            error ? <div>{error}</div> : (categories as []).map(item => <Category key={item} title={item} />)
         }
     </div>
 }

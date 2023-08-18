@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom"
 import { getProductDetail } from "../api/products";
 import { CardProps } from "../ components/Card";
 import Select from "../ components/Select";
+import CartButton from "../ components/CartButton";
 
 export default function Product () {
     const {productId = ''} = useParams();
@@ -13,7 +14,7 @@ export default function Product () {
             const data = await getProductDetail(parseInt(productId, 10));
             setProduct(data);
         })()
-    }, [])
+    }, [productId])
 
     if(product === undefined) {
         return null;
@@ -59,10 +60,7 @@ export default function Product () {
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4" />
                         </svg> */}
                     </div>
-
-                    <button type="button" className="h-14 px-6 py-2 font-semibold rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white">
-                        Add to Cart
-                    </button>
+                    <CartButton product={product} />
                     </div>
                 </div>
             </div>

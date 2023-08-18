@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import CartButton from "./CartButton";
 
 export interface CardProps {
     id: number;
@@ -6,11 +7,12 @@ export interface CardProps {
     images: string[];
     rating: number;
     price: number;
-    discountPercentage: number;
+    discountPercentage?: number;
     description: string;
     brand: string;
     stock: number;
 }
+
 
 export default function Card ({data}: {data: CardProps}) {
     const {title, images, rating, price, id} = data;
@@ -40,25 +42,22 @@ export default function Card ({data}: {data: CardProps}) {
     return (
     <div className="max-w-2xl mx-auto">
         <div className="bg-white shadow-md rounded-lg max-w-sm dark:bg-gray-800 dark:border-gray-700">
-            <Link to={`products/${id}`}>
+            <Link to={`/products/${id}`}>
                 <img className="rounded-t-lg p-8" src={images[images.length - 1]} alt={title} />
             </Link>
                 <div className="px-5 pb-5">
-                    <Link to={`products/${id}`}>
+                    <Link to={`/products/${id}`}>
                         <h3 className="text-gray-900 font-semibold text-xl tracking-tight dark:text-white">{title}</h3>
                     </Link>
                     <div className="flex items-center mt-2.5 mb-5">
                         {
                          ratingStars
                         }
-                        
                         <span className="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">{rating}</span>
                     </div>
                     <div className="flex items-center justify-between">
                         <span className="text-3xl font-bold text-gray-900 dark:text-white">${price}</span>
-                        <a href="#"
-                            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add
-                            to cart</a>
+                        <CartButton product={data} />
                     </div>
                 </div>
         </div>
