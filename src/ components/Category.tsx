@@ -2,6 +2,9 @@ import { useEffect, useState } from "react"
 import Card, { CardProps } from "./Card";
 import { getProductsOfCategory } from "../api/products";
 
+
+const productLists : Record<string, []> = {};
+
 export default function Category ({title} : {title: string}) {
     const [products, setProducts] = useState([]);
 
@@ -9,11 +12,18 @@ export default function Category ({title} : {title: string}) {
     useEffect(() => {
     
         (async function () {
-            const data = await getProductsOfCategory(title);
-            setProducts(data.products)
+            if(!productLists[title]) {
+                const data = await getProductsOfCategory(title);
+                productLists[title] = data.products;
+                setProducts(data.products)
+                return;
+            }
+
+            setProducts(productLists[title]);
         })()
             
-    }, [title])
+    }, [title, products.length])
+
 
     
     return (

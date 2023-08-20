@@ -2,11 +2,11 @@ import Category from "../ components/Category";
 import useGetCategories from "../hooks/useGetCategories";
 
 export default function Home () {
-    const [loading, error, categories] = useGetCategories();
+    const [, error, categories] = useGetCategories();
 
-    if(loading) {
-        return <div>Loading...</div>
-    }
+    // if(loading) {
+    //     return <div>Loading...</div>
+    // }
     
     return <div>
         {

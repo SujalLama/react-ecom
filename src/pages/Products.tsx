@@ -5,13 +5,13 @@ import CardList from "../ components/CardList";
 import { strRemoveDash, strToCapitalize } from "../utilities/strUtility";
 
 export default function Products() {
-    const [loading, error, categories] = useGetCategories();
+    const [, error, categories] = useGetCategories();
     const [activeCat, setActiveCat] = useState('all');
     const [search, setSearch] = useState('');
 
-    if(loading) {
-        return <div>Loading...</div>
-    }
+    // if(loading) {
+    //     return <div>Loading...</div>
+    // }
 
     if(error) {
         return <div>{error}</div>
