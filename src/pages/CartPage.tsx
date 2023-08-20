@@ -1,6 +1,7 @@
 import useCart from "../hooks/useCart"
 import CartInput from "../ components/CartInput";
 import PaymentDetail from "../ components/PaymentDetail";
+import { storeAtLocalStorage } from "../utilities/tokenManage";
 
 export default function CartPage() {
     const {cart, setCart} = useCart();
@@ -10,9 +11,13 @@ export default function CartPage() {
 
         const newCartProducts = cart.products.filter(product => product.id !== id);
         setCart(prevCart => {
-            return {
+            const newCart = {
                 ...prevCart, products: newCartProducts, total: prevCart.total - removedItemPrice
             }
+                
+            storeAtLocalStorage('cart', JSON.stringify(newCart));
+
+            return newCart;
         })
     }
 

@@ -1,5 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Cart from "./Cart";
+import useUser from "../hooks/useUser";
+import { removeFromCookies, removeFromLocalStorage } from "../utilities/tokenManage";
+import { initialUser } from "../utilities/UserProvider";
 
 interface INav {
     name: string;
@@ -22,10 +25,20 @@ const navList : INav[] = [
     {
         name: 'Contact',
         link: 'contact'
-    },
+    }
 ]
 
 export default function Header () {
+    const {user, setUser} = useUser();
+    const navigate = useNavigate();
+
+    function logOutHandler () {
+        removeFromLocalStorage('user');
+        removeFromCookies('token');
+        setUser(initialUser);
+        navigate('/', {replace: true});
+    }
+
     return (
     <header>
             <div className="py-4 px-2 lg:mx-4 xl:mx-12 ">
@@ -45,8 +58,31 @@ export default function Header () {
                             <div className="text-sm lg:flex-grow mt-2 animated jackinthebox xl:mx-8">
                                 {
                                     navList.map(nav => {
-                                        return <Link className="block lg:inline-block text-md font-bold  text-orange-500  sm:hover:border-indigo-400  hover:text-orange-500 mx-2 focus:text-blue-500  p-1 hover:bg-gray-300 sm:hover:bg-transparent rounded-lg" key={nav.link} to={nav.link}>{nav.name}</Link>
+                                        return (
+                                            <Link className="block lg:inline-block text-md font-bold  text-orange-500  sm:hover:border-indigo-400  hover:text-orange-500 mx-2 focus:text-blue-500  p-1 hover:bg-gray-300 sm:hover:bg-transparent rounded-lg" 
+                                                key={nav.link} 
+                                                to={nav.link} 
+                                                >
+                                                    {nav.name}
+                                            </Link>
+                                        )
                                     })
+                                }
+                                {
+                                    user.id 
+                                        ? (
+                                        <>
+                                            <button onClick={logOutHandler} className="block lg:inline-block text-md font-bold  text-orange-500  sm:hover:border-indigo-400  hover:text-orange-500 mx-2 focus:text-blue-500  p-1 hover:bg-gray-300 sm:hover:bg-transparent rounded-lg"
+                                            >Logout</button>
+                                            <Link className="block lg:inline-block text-md font-bold  text-orange-500  sm:hover:border-indigo-400  hover:text-orange-500 mx-2 focus:text-blue-500  p-1 hover:bg-gray-300 sm:hover:bg-transparent rounded-lg"
+                                                to='dashboard'>Dashboard</Link>
+                                        </>
+                                    ) 
+                                    : (<Link className="block lg:inline-block text-md font-bold  text-orange-500  sm:hover:border-indigo-400  hover:text-orange-500 mx-2 focus:text-blue-500  p-1 hover:bg-gray-300 sm:hover:bg-transparent rounded-lg"  
+                                            to='login' 
+                                            >
+                                                Login
+                                        </Link>)
                                 }
                                 <Cart />
                             </div>

@@ -2,6 +2,7 @@ import { useState } from "react";
 import Button from "./Button";
 import useCart from "../hooks/useCart";
 import { CardProps } from "./Card";
+import { storeAtLocalStorage } from "../utilities/tokenManage";
 
 export interface AddedCart {
     id: number;
@@ -18,12 +19,17 @@ export default function CartButton ({product} : {product: CardProps}) {
 
     const {cart, setCart} = useCart();
 
-    function addToCart (cart: AddedCart) {
+    function addToCart (addCart: AddedCart) {
         setCartAdded(true);
         setCart((prevCart) => {
-            return {...prevCart, 
-                products: [...prevCart.products, cart], 
-                total: prevCart.total + cart.price}
+
+            const newCart = {...prevCart, 
+                products: [...prevCart.products, addCart], 
+                total: prevCart.total + addCart.price};
+                
+            storeAtLocalStorage('cart', JSON.stringify(newCart));
+
+            return newCart;
         })
     }
 

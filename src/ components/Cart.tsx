@@ -1,6 +1,7 @@
-import { useState } from "react";
+import {  useState } from "react";
 import useCart from "../hooks/useCart";
 import { Link } from "react-router-dom";
+import { storeAtLocalStorage } from "../utilities/tokenManage";
 
 export default function Cart () {
     const {cart, setCart} = useCart();
@@ -12,9 +13,11 @@ export default function Cart () {
 
         const newCartProducts = cart.products.filter(product => product.id !== id);
         setCart(prevCart => {
-            return {
+            const newCart = {
                 ...prevCart, products: newCartProducts, total: prevCart.total - removedItemPrice
             }
+            storeAtLocalStorage('cart', JSON.stringify(newCart));
+            return newCart
         })
     }
 
@@ -61,7 +64,7 @@ export default function Cart () {
                                     })
                                 }
                                 <div className="p-4 justify-center flex bg-white">
-                                    <Link to="/checkout" 
+                                    <Link to="/checkout" state={{backLink : '/login'}}
                                     className="text-base  hover:scale-110 focus:outline-none p-2 text-center mr-2 rounded font-bold cursor-pointer hover:bg-teal-700 hover:text-teal-100 bg-teal-100 text-teal-700 border duration-200 ease-in-out border-teal-600 transition">
                                         Checkout ${cart.total}
                                     </Link>

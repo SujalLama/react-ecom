@@ -8,6 +8,11 @@ import Contact from './pages/Contact';
 import About from './pages/About';
 import CartPage from './pages/CartPage';
 import Checkout from './pages/Checkout';
+import Login from './pages/Login';
+import Dashboard from './pages/Dashboard';
+import PrivateRoute from './ components/PrivateRoute';
+import Profile from './pages/Profile';
+import Orders from './pages/Orders';
 
 function App() {
   return (
@@ -19,7 +24,14 @@ function App() {
           <Route path="contact" element={<Contact />} />
           <Route path="about" element={<About />} />
           <Route path="cart" element={<CartPage />} />
-          <Route path="checkout" element={<Checkout />} />
+          <Route path="login" element={<Login />} />
+          <Route element={<PrivateRoute />}>
+            <Route path="dashboard" element={<Dashboard />}>
+                <Route path="profile" element={<Profile />} />
+                <Route path="orders" element={<Orders />} />
+            </Route>
+            <Route path="checkout" element={<Checkout />} />
+          </Route>
           <Route path="products" element={<Products />} />
           <Route path="products/:productId" element={<Product />} />
           <Route path="*" element={<NotFound />} />

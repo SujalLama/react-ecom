@@ -1,6 +1,7 @@
 import { FormEvent, useState } from "react";
 import { AddedCart } from "./CartButton";
 import useCart from "../hooks/useCart";
+import { storeAtLocalStorage } from "../utilities/tokenManage";
 
 
 export default function CartInput ({product}: {product: AddedCart}) {
@@ -37,7 +38,10 @@ export default function CartInput ({product}: {product: AddedCart}) {
             });
 
             const total = newProductPrice + otherTotalPrice;
-            return {...prevCart, products: newProducts, total}
+
+            const newCart = {...prevCart, products: newProducts, total};
+            storeAtLocalStorage('cart', JSON.stringify(newCart));
+            return newCart
         })
     }
 

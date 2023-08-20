@@ -32,7 +32,7 @@ export default function PaymentDetail ({checkout = true} : {checkout ?: boolean}
             </div>
             {
                 checkout && (
-                    <Link to="/checkout" className="mt-6 w-full flex items-center justify-center rounded-md bg-blue-500 py-1.5 font-medium text-blue-50 hover:bg-blue-600">
+                    <Link to="/checkout" state={{backLink: '/login'}} className="mt-6 w-full flex items-center justify-center rounded-md bg-blue-500 py-1.5 font-medium text-blue-50 hover:bg-blue-600">
                         Check out
                     </Link>
                 )
