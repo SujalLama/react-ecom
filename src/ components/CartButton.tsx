@@ -21,7 +21,9 @@ export default function CartButton ({product} : {product: CardProps}) {
     function addToCart (cart: AddedCart) {
         setCartAdded(true);
         setCart((prevCart) => {
-            return {...prevCart, products: [...prevCart.products, cart], total: prevCart.total + cart.price}
+            return {...prevCart, 
+                products: [...prevCart.products, cart], 
+                total: prevCart.total + cart.price}
         })
     }
 

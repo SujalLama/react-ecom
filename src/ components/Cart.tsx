@@ -61,12 +61,12 @@ export default function Cart () {
                                     })
                                 }
                                 <div className="p-4 justify-center flex bg-white">
-                                    <button 
-                                    className="text-base  undefined  hover:scale-110 focus:outline-none flex justify-center mx-4 my-2 rounded font-bold cursor-pointer hover:bg-teal-700 hover:text-teal-100 bg-teal-100 text-teal-700 border duration-200 ease-in-out border-teal-600 transition">
+                                    <Link to="/checkout" 
+                                    className="text-base  hover:scale-110 focus:outline-none p-2 text-center mr-2 rounded font-bold cursor-pointer hover:bg-teal-700 hover:text-teal-100 bg-teal-100 text-teal-700 border duration-200 ease-in-out border-teal-600 transition">
                                         Checkout ${cart.total}
-                                    </button>
+                                    </Link>
                                     <Link to="/cart" 
-                                    className="text-base  undefined  hover:scale-110 focus:outline-none flex justify-center mx-4 my-2 rounded font-bold cursor-pointer hover:bg-teal-700 hover:text-teal-100 bg-teal-100 text-teal-700 border duration-200 ease-in-out border-teal-600 transition">
+                                    className="text-base  hover:scale-110 focus:outline-none p-2 text-center rounded font-bold cursor-pointer hover:bg-teal-700 hover:text-teal-100 bg-teal-100 text-teal-700 border duration-200 ease-in-out border-teal-600 transition">
                                         Go to Cart
                                     </Link>
                                 </div>
